@@ -12,14 +12,23 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState({
+    0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0
+  })
 
   function randomize() {
     const nr = Math.floor(Math.random() * anecdotes.length)
     return nr
   }
 
-  const handleClick = () => {
+  const handleNext = () => {
     setSelected(randomize())
+  }
+
+  const handleVote = () => {
+    let newPoints = { ... points}
+    newPoints[selected] += 1
+    setPoints(newPoints)
   }
 
   return (
@@ -28,7 +37,10 @@ const App = () => {
         {anecdotes[selected]}
       </div>
       <div>
-        <button onClick={handleClick}>
+        <button onClick={handleVote}>
+          vote
+        </button>
+        <button onClick={handleNext}>
           next anecdote
         </button>
       </div>
