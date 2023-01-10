@@ -8,6 +8,7 @@ const Button = ({ handleClick, text}) => {
   )
 }
 
+const StatisticsLine = ({ text, value}) => <div>{text} {value}</div>
 
 const Statistics = ({ feedback }) => {
   let sum = feedback.good + feedback.neutral + feedback.bad
@@ -22,12 +23,12 @@ const Statistics = ({ feedback }) => {
   return (
     <div>
       <h2>statistics</h2>
-      <p>good {feedback.good}</p>
-      <p>neutral {feedback.neutral}</p>
-      <p>bad {feedback.bad}</p>
-      <p>all {sum}</p>
-      <p>average {average}</p>
-      <p>positive {positive} %</p>
+      <StatisticsLine text={"good"} value={feedback.good} />
+      <StatisticsLine text={"neutral"} value={feedback.neutral} />
+      <StatisticsLine text={"bad"} value={feedback.bad} />
+      <StatisticsLine text={"all"} value={sum} />
+      <StatisticsLine text={"average"} value={average} />
+      <StatisticsLine text={"positive"} value={String(positive) + "%"} />
     </div>
   )
 }
