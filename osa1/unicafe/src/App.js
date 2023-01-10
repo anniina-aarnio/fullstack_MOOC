@@ -1,10 +1,16 @@
+const Button = ({ handleClick, text}) => {
+  return (
+    <button onClick={handleClick}>
+      {text}
+    </button>
+  )
+}
+
 
 function App() {
   return (
     <div>
-      <p>
-        hello
-      </p>
+      <Button handleClick={() => console.log("click")} text={"nappi"} />
     </div>
   );
 }
