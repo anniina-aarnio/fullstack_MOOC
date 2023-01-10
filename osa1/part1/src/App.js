@@ -52,6 +52,21 @@ const Counter = (props) => {
   )
 }
 
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return (
+      <div>
+        the app is used by pressing the buttons
+      </div>
+    )
+  }
+  return (
+    <div>
+      button press history: {props.allClicks.join(' ')}
+    </div>
+  )
+}
+
 const LeftRightCounter = () => {
 
   const [clicks, setClicks] = useState({
@@ -81,9 +96,7 @@ const LeftRightCounter = () => {
           right
         </button>
         {clicks.right}
-        <p>
-          {allClicks.join(' ')}
-        </p>
+        <History allClicks={allClicks} />
       </div>
     </div>
   )
