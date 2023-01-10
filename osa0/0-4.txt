@@ -1,0 +1,49 @@
++--------+                                                      +----------+
+| selain |                                                      | palvelin |
++--------+                                                      +----------+
+    |                                                               |
+    | HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note  |
+    +-------------------------------------------------------------->|
+    |                                            +----------------------------+
+    |                                            | palvelin luo muistiinpanoa |
+    |                                            | vastaavan olion ja lisää   |
+    |                                            | sen muistiinpanotaulukkoon |
+    |                                            | nimeltä "notes"            |
+    |                                            +----------------------------+
+    |                                                               |
+    |                           HTTP-status 302                     |
+    |<- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+    |                                                               |
+    | HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes      |
+    +-------------------------------------------------------------->|
+    |                                                               |
+    |                       HTML-koodi                              |
+    |<- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+    |                                                               |
+    | HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css   |
+    +-------------------------------------------------------------->|
+    |                                                               |
+    |                       main.css                                |
+    |<- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+    |                                                               |
+    | HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js    |
+    +-------------------------------------------------------------->|
+    |                                                               |
+    |                       main.js                                 |
+    |<- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
++----------------------------+                                      |
+| selain suorittaa js-koodia |                                      |
+| joka pyytää JSON-datan     |                                      |
+| palvelimelta               |                                      |
++----------------------------+                                      |
+    |                                                               |
+    | HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json  |
+    +-------------------------------------------------------------->|
+    |                                                               |
+    |  [{ content: "what!, date: "2023-01-10T08:51:59.952Z"}, ...]  |
+    |<- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
++----------------------------------------+                          |
+| selain suorittaa tapahtumakäsittelijän |                          |
+| joka renderöi muistiinpanot näytölle   |                          |
++----------------------------------------+                          |
+    |                                                               |
