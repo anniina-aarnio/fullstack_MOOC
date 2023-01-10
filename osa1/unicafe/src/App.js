@@ -8,9 +8,17 @@ const Button = ({ handleClick, text}) => {
 
 
 function App() {
+
+  const handleClick = () => {
+    console.log("click")
+  }
+
   return (
     <div>
-      <Button handleClick={() => console.log("click")} text={"nappi"} />
+      <h1>give feedback</h1>
+      <Button handleClick={handleClick} text={"good"} />
+      <Button handleClick={handleClick} text={"neutral"} />
+      <Button handleClick={handleClick} text={"bad"} />
     </div>
   );
 }
