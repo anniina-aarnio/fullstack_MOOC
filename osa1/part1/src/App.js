@@ -15,6 +15,20 @@ const Hello = ({ name, age }) => {
   )
 }
 
+const Display = (props) => {
+  return (
+    <div>{props.counter}</div>
+  )
+}
+
+const Button = (props) => {
+  return (
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+  )
+}
+
 const Counter = (props) => {
   const [ counter, setCounter] = useState(props.start)
 
@@ -24,15 +38,15 @@ const Counter = (props) => {
 
   return (
     <div>
-      <div>
-        {counter}
-      </div>
-      <button onClick={increaseByOne}>
-        plus
-      </button>
-      <button onClick={setToZero}>
-        zero
-      </button>
+      <Display counter={counter} />
+      <Button
+        handleClick={increaseByOne}
+        text={"plus"}
+      />
+      <Button
+        handleClick={setToZero}
+        text={"zero"}
+      />
     </div>
   )
 }
