@@ -5,7 +5,14 @@ import App from './App';
 let counter = 1
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <App counter={counter} />
-);
+const refresh = () => {
+    root.render(
+        <App counter={counter} />
+    );
+}
 
+refresh()
+counter += 1
+refresh()
+counter += 1
+refresh()
