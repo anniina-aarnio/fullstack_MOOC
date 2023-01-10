@@ -15,6 +15,7 @@ const App = () => {
   const [points, setPoints] = useState({
     0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0
   })
+  const [mostVoted, setMostVoted] = useState(0)
 
   function randomize() {
     const nr = Math.floor(Math.random() * anecdotes.length)
@@ -28,11 +29,15 @@ const App = () => {
   const handleVote = () => {
     let newPoints = { ... points}
     newPoints[selected] += 1
+    if (newPoints[selected] > points[mostVoted]) {
+      setMostVoted(selected)
+    }
     setPoints(newPoints)
   }
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <div>
         {anecdotes[selected]}
       </div>
@@ -43,6 +48,10 @@ const App = () => {
         <button onClick={handleNext}>
           next anecdote
         </button>
+      </div>
+      <h2>Anecdote with most votes</h2>
+      <div>
+        {anecdotes[mostVoted]}
       </div>
     </div>
   )
