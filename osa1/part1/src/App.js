@@ -13,9 +13,11 @@ const Hello = ({ name, age }) => {
   )
 }
 
-const App = () => {
+const App = (props) => {
   const nimi = 'Pekka'
   const ika = 10
+
+  const {counter} = props
 
   return (
     <>
@@ -23,6 +25,7 @@ const App = () => {
       <Hello name="Maya" age={26 + 10} />
       <Hello name={nimi} age={ika}/>
       <Hello name="JK" age={2023-1982} />
+      <div>{counter}</div>
     </>
   );
 }
