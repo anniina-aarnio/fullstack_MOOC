@@ -52,6 +52,27 @@ const Counter = (props) => {
   )
 }
 
+const LeftRightCounter = () => {
+
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+
+  return (
+    <div>
+      <div>
+        {left}
+        <button onClick={() => setLeft(left + 1)}>
+          left
+        </button>
+        <button onClick={() => setRight(right + 1)}>
+          right
+        </button>
+        {right}
+      </div>
+    </div>
+  )
+}
+
 const App = () => {
   const nimi = 'Pekka'
   const ika = 10
@@ -63,6 +84,7 @@ const App = () => {
       <Hello name={nimi} age={ika}/>
       <Hello name="JK" age={2023-1982} />
       <Counter start={0} />
+      <LeftRightCounter />
     </>
   );
 }
