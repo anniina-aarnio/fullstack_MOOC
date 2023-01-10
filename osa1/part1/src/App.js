@@ -15,16 +15,25 @@ const Hello = ({ name, age }) => {
   )
 }
 
+const Counter = (props) => {
+  const [ counter, setCounter] = useState(props.start)
+
+
+  return (
+    <div>
+      <div>
+        {counter}
+      </div>
+      <button onClick={() => setCounter(counter + 1)}>
+        plus
+      </button>
+    </div>
+  )
+}
+
 const App = () => {
   const nimi = 'Pekka'
   const ika = 10
-
-  const [ counter, setCounter] = useState(0)
-  setTimeout(
-    () => setCounter(counter + 1),
-    1000
-  )
-
 
   return (
     <>
@@ -32,7 +41,7 @@ const App = () => {
       <Hello name="Maya" age={26 + 10} />
       <Hello name={nimi} age={ika}/>
       <Hello name="JK" age={2023-1982} />
-      <div>{counter}</div>
+      <Counter start={0} />
     </>
   );
 }
