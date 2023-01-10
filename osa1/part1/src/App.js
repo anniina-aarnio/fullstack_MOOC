@@ -89,12 +89,8 @@ const LeftRightCounter = () => {
     <div>
       <div>
         {clicks.left}
-        <button onClick={handleLeftClick}>
-          left
-        </button>
-        <button onClick={handleRightClick}>
-          right
-        </button>
+        <Button handleClick={handleLeftClick} text={"left"} />
+        <Button handleClick={handleRightClick} text={"right"} />
         {clicks.right}
         <History allClicks={allClicks} />
       </div>
