@@ -57,21 +57,17 @@ const LeftRightCounter = () => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
-
+  const [allClicks, setAllClicks] = useState([])
+ 
   const handleLeftClick = () => {
-    const newClicks = {
-      left: clicks.left + 1,
-      right: clicks.right
-    }
-    setClicks(newClicks)
+    setAllClicks(allClicks.concat('L'))
+    // concat luo uuden taulukon, johon uusi alkio lisätty
+    setClicks({...clicks, left: clicks.left + 1})
   }
 
   const handleRightClick = () => {
-    const newClicks = {
-      left: clicks.left,
-      right: clicks.right + 1
-    }
-    setClicks(newClicks)
+    setAllClicks(allClicks.concat('R'))
+    setClicks({...clicks, right: clicks.right + 1})
   }
 
   return (
@@ -85,6 +81,9 @@ const LeftRightCounter = () => {
           right
         </button>
         {clicks.right}
+        <p>
+          {allClicks.join(' ')}
+        </p>
       </div>
     </div>
   )
