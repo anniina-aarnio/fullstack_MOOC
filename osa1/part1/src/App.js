@@ -36,6 +36,8 @@ const Counter = (props) => {
 
   const setToZero = () => setCounter(0)
 
+  const decreaseByOne = () => setCounter(counter -1)
+
   return (
     <div>
       <Display counter={counter} />
@@ -46,6 +48,10 @@ const Counter = (props) => {
       <Button
         handleClick={setToZero}
         text={"zero"}
+      />
+      <Button
+        handleClick={decreaseByOne}
+        text={"minus"}
       />
     </div>
   )
