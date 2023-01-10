@@ -10,12 +10,19 @@ const Button = ({ handleClick, text}) => {
 
 
 const Statistics = ({ feedback }) => {
+  let sum = feedback.good + feedback.neutral + feedback.bad
+  let average = (feedback.good - feedback.bad) / sum
+  let positive = feedback.good / sum * 100
+
   return (
     <div>
       <h2>statistics</h2>
       <p>good {feedback.good}</p>
       <p>neutral {feedback.neutral}</p>
       <p>bad {feedback.bad}</p>
+      <p>all {sum}</p>
+      <p>average {average}</p>
+      <p>positive {positive} %</p>
     </div>
   )
 }
