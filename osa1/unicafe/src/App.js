@@ -11,6 +11,11 @@ const Button = ({ handleClick, text}) => {
 
 const Statistics = ({ feedback }) => {
   let sum = feedback.good + feedback.neutral + feedback.bad
+
+  if (sum == 0) {
+    return <p>No feedback given</p>
+  }
+
   let average = (feedback.good - feedback.bad) / sum
   let positive = feedback.good / sum * 100
 
