@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const Hello = ({ name, age }) => {
   const bornYear = () => new Date().getFullYear() - age
 
@@ -13,11 +15,16 @@ const Hello = ({ name, age }) => {
   )
 }
 
-const App = (props) => {
+const App = () => {
   const nimi = 'Pekka'
   const ika = 10
 
-  const {counter} = props
+  const [ counter, setCounter] = useState(0)
+  setTimeout(
+    () => setCounter(counter + 1),
+    1000
+  )
+
 
   return (
     <>
