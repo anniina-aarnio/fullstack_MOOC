@@ -18,13 +18,11 @@ const Hello = ({ name, age }) => {
 const Display = ({ counter }) => <div>{counter}</div>
 
 
-const Button = (props) => {
-  return (
-    <button onClick={props.handleClick}>
-      {props.text}
-    </button>
-  )
-}
+const Button = ({ handleClick, text}) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
 
 const Counter = (props) => {
   const [ counter, setCounter] = useState(props.start)
