@@ -9,6 +9,17 @@ const Button = ({ handleClick, text}) => {
 }
 
 
+const Statistics = ({ feedback }) => {
+  return (
+    <div>
+      <h2>statistics</h2>
+      <p>good {feedback.good}</p>
+      <p>neutral {feedback.neutral}</p>
+      <p>bad {feedback.bad}</p>
+    </div>
+  )
+}
+
 function App() {
 
   const [feedback, setFeedback] = useState({
@@ -21,7 +32,6 @@ function App() {
     let newFeedback = { ...feedback}
     newFeedback[which] = newFeedback[which] + 1
     setFeedback(newFeedback)
-    console.log(newFeedback)
   }
 
   return (
@@ -30,6 +40,7 @@ function App() {
       <Button handleClick={handleClick("good")} text={"good"} />
       <Button handleClick={handleClick("neutral")} text={"neutral"} />
       <Button handleClick={handleClick("bad")} text={"bad"} />
+      <Statistics feedback={feedback} />
     </div>
   );
 }
