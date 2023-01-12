@@ -9,6 +9,10 @@ const App = () => {
 
   const handleClick = (e) => {
     e.preventDefault()
+    if (persons.find((person) => person.name === newName)) {
+      window.alert(`${newName} is already added to phonebook`)
+      return
+    }
     setPersons(persons.concat({ name: newName }))
     setNewName('')
   }
