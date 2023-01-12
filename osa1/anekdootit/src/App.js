@@ -32,7 +32,7 @@ const App = () => {
     if (newPoints[selected] > points[mostVoted]) {
       setMostVoted(selected)
     }
-    setPoints(newPoints)
+    setPoints(newPoints) 
   }
 
   return (
