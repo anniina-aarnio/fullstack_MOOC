@@ -1,16 +1,11 @@
-const Header = (props) => {
-    return (
-      <h1>{props.course}</h1>
-    )
-  }
-  
-  const Part = (props) => {
+import Header from './Header'
+const Part = (props) => {
     return (
       <p>{props.part.name} {props.part.exercises}</p>
     )
-  }
+}
   
-  const Content = (props) => {
+const Content = (props) => {
     return (
       <div>
         <Part part={props.parts[0]} />
@@ -18,9 +13,9 @@ const Header = (props) => {
         <Part part={props.parts[2]} />
       </div>
     )
-  }
+}
   
-  const Total = (props) => {
+const Total = (props) => {
     const number = props.parts[0].exercises
                     + props.parts[1].exercises
                     + props.parts[2].exercises
@@ -31,7 +26,7 @@ const Header = (props) => {
     )
   }
 
-  const Course = ({ course }) => {
+const Course = ({ course }) => {
     return (
         <div>
             <Header course={course.name} />
@@ -39,6 +34,6 @@ const Header = (props) => {
             <Total parts={course.parts} />
         </div>
     )
-  }
+}
 
-  export default Course
+export default Course
