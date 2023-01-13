@@ -1,7 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import axios from 'axios'
 
-let counter = 1
+const promise = axios.get('http://localhost:3001/notes')
+console.log(promise)
+promise.then(response => {
+    console.log(response)
+})
 
-const root = ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
