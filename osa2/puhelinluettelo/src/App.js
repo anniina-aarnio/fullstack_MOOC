@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Filter from './components/Filter'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -7,7 +8,7 @@ const App = () => {
     { name: 'Dan Abramov', number: '12-43-234345' },
     { name: 'Mary Poppendieck', number: '39-23-6423122' }
   ])
-  const [filterer, setFilterer] = useState('')
+  const [filter, setFilter] = useState('')
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
@@ -31,15 +32,14 @@ const App = () => {
     setNewNumber(e.target.value)
   }
 
-  const handleFiltererChange = (e) => {
-    setFilterer(e.target.value)
-    // tähän lisäksi toiminnallisuus sille mitä näytetään...?
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value)
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      filter shown with <input value={filterer} onChange={handleFiltererChange} />
+      <Filter filter={filter} onChange={handleFilterChange} />
       <h2>add a new</h2>
       <form>
         <div>
@@ -58,7 +58,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       {persons
-        .filter((person) => person.name.toLowerCase().includes(filterer.toLowerCase()))
+        .filter((person) => person.name.toLowerCase().includes(filter.toLowerCase()))
         .map((person) =>
           <p key={person.name}>
             {person.name} {person.number}
