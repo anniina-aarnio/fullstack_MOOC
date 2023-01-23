@@ -10,7 +10,7 @@ const App = () => {
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
-  useEffect(() => {
+  const hook = () => {
     console.log('effect')
     axios
       .get('http://localhost:3001/notes')
@@ -19,7 +19,8 @@ const App = () => {
         setNotes(response.data)
         console.log(response.data)
       })
-  }, [])
+  }
+  useEffect(hook, [])
   console.log('render', notes.length, 'notes')
 
 
@@ -36,7 +37,8 @@ const App = () => {
       <Hello name="JK" age={2023-1982} />
       <Counter start={0} />
       <LeftRightCounter />
-      {notes.map((note) => <Note text={note.content} />)}
+      <br />
+      {notes.map((note) => <Note key={note.id} text={note.content} />)}
     </>
   );
 }
