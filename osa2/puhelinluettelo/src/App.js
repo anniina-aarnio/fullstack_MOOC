@@ -51,7 +51,10 @@ const App = () => {
   }
 
   const deleteObject = (id) => {
-    console.log(`delete ${id}`)
+    const person = persons.find(p => p.id === id)
+    if (window.confirm(`Delete ${person.name} ?`)) {
+      console.log(`delete person`, person)
+    }
   }
 
   return (
