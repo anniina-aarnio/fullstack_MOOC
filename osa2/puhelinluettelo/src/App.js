@@ -50,6 +50,10 @@ const App = () => {
     setFilter(e.target.value)
   }
 
+  const deleteObject = (id) => {
+    console.log(`delete ${id}`)
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -62,7 +66,10 @@ const App = () => {
         numberChange={handleNumberChange}
         handleClick={handleClick} />
       <h2>Numbers</h2>
-      <Persons persons={persons} filter={filter} />
+      <Persons
+        persons={persons}
+        filter={filter}
+        deleteObject={deleteObject} />
     </div>
   )
 
