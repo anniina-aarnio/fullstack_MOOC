@@ -26,6 +26,14 @@ const App = () => {
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         const person = persons.find(p => p.name === newName.trim())
         console.log("person", person)
+
+        personService
+          .update(person.id, { ...person, number: newNumber.trim()})
+          .then(response => {
+            setPersons(persons.map(p => p.id !== person.id ? p : response.data))
+            setNewName('')
+            setNewNumber('')
+        })
       }
       return
     }
