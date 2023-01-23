@@ -26,10 +26,16 @@ const App = () => {
       window.alert(`${newName} is already added to phonebook`)
       return
     }
-    setPersons(persons.concat(
-      { name: newName.trim(), number: newNumber.trim() }))
-    setNewName('')
-    setNewNumber('')
+    const personObject = { name: newName.trim(), number: newNumber.trim() }
+
+    personService
+      .create(personObject)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+        setNewName('')
+        setNewNumber('')
+      })
+
   }
 
   const handleNameChange = (e) => {
