@@ -36,7 +36,7 @@ const App = () => {
       <Hello name="JK" age={2023-1982} />
       <Counter start={0} />
       <LeftRightCounter />
-      {}
+      {notes.map((note) => <Note text={note.content} />)}
     </>
   );
 }
