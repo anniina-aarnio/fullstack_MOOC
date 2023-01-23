@@ -54,7 +54,15 @@ const App = () => {
     : notes.filter(note => note.important)
 
   const toggleImportanceOf = (id) => {
-    console.log(`importance of ${id} needs to be toggled`)
+    const url = `http://localhost:3001/notes/${id}`
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+    
+    axios
+      .put(url, changedNote)
+      .then(response => {
+        setNotes(notes.map(note => note.id !== id ? note: response.data))
+    })
   }
 
   return (
