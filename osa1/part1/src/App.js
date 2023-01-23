@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import noteService from './services/notes'
 import Note from './components/Note'
 import Counter from './components/Counter'
 import Hello from './components/Hello'
@@ -9,23 +9,20 @@ const App = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
-
-  const hook = () => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/notes')
-      .then(response => {
-        console.log('promise fulfilled')
-        setNotes(response.data)
-        console.log(response.data)
-      })
-  }
-  useEffect(hook, [])
-  console.log('render', notes.length, 'notes')
-
-
+  
   const nimi = 'Pekka'
   const ika = 10
+
+  const hook = () => {
+    noteService
+      .getAll()
+      .then(response => {
+        setNotes(response.data)
+      })
+  }
+
+  useEffect(hook, [])
+  console.log('render', notes.length, 'notes')
 
   const addNote = event => {
     event.preventDefault()
@@ -35,12 +32,11 @@ const App = () => {
       important: Math.random() > 0.5
     }
 
-    axios
-      .post('http://localhost:3001/notes', noteObject)
+    noteService
+      .create(noteObject)
       .then(response => {
         setNotes(notes.concat(response.data))
         setNewNote('')
-        console.log(response)
       })
   }
 
@@ -54,15 +50,14 @@ const App = () => {
     : notes.filter(note => note.important)
 
   const toggleImportanceOf = (id) => {
-    const url = `http://localhost:3001/notes/${id}`
     const note = notes.find(n => n.id === id)
-    const changedNote = { ...note, important: !note.important }
-    
-    axios
-      .put(url, changedNote)
+    const changedNote = { ...note, important: !note.important}
+
+    noteService
+      .update(id, changedNote)
       .then(response => {
-        setNotes(notes.map(note => note.id !== id ? note: response.data))
-    })
+        setNotes(notes.map(note => note.id !== id ? note : response.data))
+      })
   }
 
   return (
