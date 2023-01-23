@@ -1,6 +1,6 @@
-const Note = ({ text}) => (
+const Note = ({ note }) => (
   <div>
-    {text}
+    {note}
   </div>
 )
 
