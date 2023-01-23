@@ -23,7 +23,10 @@ const App = () => {
   const handleClick = (e) => {
     e.preventDefault()
     if (persons.find((person) => person.name === newName.trim())) {
-      window.alert(`${newName} is already added to phonebook`)
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        const person = persons.find(p => p.name === newName.trim())
+        console.log("person", person)
+      }
       return
     }
     const personObject = { name: newName.trim(), number: newNumber.trim() }
