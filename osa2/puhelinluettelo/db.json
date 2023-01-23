@@ -6,11 +6,6 @@
       "id": 1
     },
     {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
       "name": "Dan Abramov",
       "number": "12-43-234345",
       "id": 3
@@ -24,11 +19,6 @@
       "name": "Hello World",
       "number": "123-456-789",
       "id": 5
-    },
-    {
-      "name": "kissa",
-      "number": "koira",
-      "id": 6
     }
   ]
 }
