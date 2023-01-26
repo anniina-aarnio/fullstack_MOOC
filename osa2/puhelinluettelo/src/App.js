@@ -79,6 +79,7 @@ const App = () => {
         .then(response => {
           setPersons(persons.filter(p => p.id !== id))
         })
+      changeSuccessBlock(`${person.name} deleted`)
     }
   }
 
