@@ -1,4 +1,4 @@
-const AddedBlock = ({ text }) => {
+const SuccessBlock = ({ text }) => {
   if (text === null) {
     return null
   }
@@ -10,4 +10,4 @@ const AddedBlock = ({ text }) => {
   )
 }
 
-export default AddedBlock
+export default SuccessBlock

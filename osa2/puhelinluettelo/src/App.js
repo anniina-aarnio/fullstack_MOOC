@@ -3,7 +3,7 @@ import personService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import AddedBlock from './components/AddedBlock'
+import SuccessBlock from './components/SuccessBlock'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -22,6 +22,13 @@ const App = () => {
 
   useEffect(hook, [])
 
+  function changeSuccessBlock(text) {
+    setAdded(text)
+    setTimeout(() => {
+      setAdded(null)
+    }, 5000)
+  }
+
   const handleClick = (e) => {
     e.preventDefault()
     if (persons.find((person) => person.name === newName.trim())) {
@@ -36,6 +43,7 @@ const App = () => {
             setNewName('')
             setNewNumber('')
         })
+        changeSuccessBlock(`Changed ${person.name}`)
       }
       return
     }
@@ -48,10 +56,7 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
-    setAdded(`Added ${personObject.name}`)
-    setTimeout(() => {
-      setAdded(null)
-    }, 5000)
+    changeSuccessBlock(`Added ${personObject.name}`)
   }
 
   const handleNameChange = (e) => {
@@ -80,7 +85,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <AddedBlock text={added} />
+      <SuccessBlock text={added} />
       <Filter filter={filter} handleChange={handleFilterChange} />
       <h2>add a new</h2>
       <PersonForm
