@@ -5,6 +5,7 @@ import Counter from './components/Counter'
 import Hello from './components/Hello'
 import LeftRightCounter from './components/LeftRightCounter'
 import Notification from './components/Notification'
+import Footer from './components/Footer'
 
 const App = () => {
   const [notes, setNotes] = useState([])
@@ -102,6 +103,7 @@ const App = () => {
           />
           <button type="submit">save</button>
         </form>
+        <Footer />
       </div>
     </div>
   );
