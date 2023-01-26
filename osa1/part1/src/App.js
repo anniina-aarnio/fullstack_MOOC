@@ -4,11 +4,13 @@ import Note from './components/Note'
 import Counter from './components/Counter'
 import Hello from './components/Hello'
 import LeftRightCounter from './components/LeftRightCounter'
+import Notification from './components/Notification'
 
 const App = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
+  const [errorMessage, setErrorMessage] = useState('some error happened...')
   
   const nimi = 'Pekka'
   const ika = 10
@@ -67,7 +69,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <div>
       <h1>Greetings</h1>
       <Hello name="Maya" age={26 + 10} />
       <Hello name={nimi} age={ika}/>
@@ -75,29 +77,30 @@ const App = () => {
       <Counter start={0} />
       <LeftRightCounter />
       <div>
-      <h1>Notes</h1>
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all' }
-        </button>
-      </div>   
-      <ul>
-        {notesToShow.map(note => 
-          <Note
-            key={note.id}
-            note={note}
-            toggleImportance={() => toggleImportanceOf(note.id)} />
-        )}
-      </ul>
-      <form onSubmit={addNote}>
-        <input
-          value={newNote}
-          onChange={handleNoteChange}
-        />
-        <button type="submit">save</button>
-      </form>
+        <h1>Notes</h1>
+        <Notification message={errorMessage} />
+        <div>
+          <button onClick={() => setShowAll(!showAll)}>
+            show {showAll ? 'important' : 'all' }
+          </button>
+        </div>   
+        <ul>
+          {notesToShow.map(note => 
+            <Note
+              key={note.id}
+              note={note}
+              toggleImportance={() => toggleImportanceOf(note.id)} />
+          )}
+        </ul>
+        <form onSubmit={addNote}>
+          <input
+            value={newNote}
+            onChange={handleNoteChange}
+          />
+          <button type="submit">save</button>
+        </form>
+      </div>
     </div>
-    </>
   );
 }
 
