@@ -9,6 +9,7 @@ const App = () => {
   const [filter, setFilter] = useState('')
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [added, setAdded] = useState('testi')
 
   const hook = () => {
     personService
