@@ -4,7 +4,7 @@ const AddedBlock = ({ text }) => {
   }
 
   return (
-    <div className={success}>
+    <div className={"success"}>
       {text}
     </div>
   )

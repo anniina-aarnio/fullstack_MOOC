@@ -3,13 +3,14 @@ import personService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import AddedBlock from './components/AddedBlock'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [filter, setFilter] = useState('')
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [added, setAdded] = useState('testi')
+  const [added, setAdded] = useState(null)
 
   const hook = () => {
     personService
@@ -47,7 +48,10 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
-
+    setAdded(`Added ${personObject.name}`)
+    setTimeout(() => {
+      setAdded(null)
+    }, 5000)
   }
 
   const handleNameChange = (e) => {
@@ -76,6 +80,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <AddedBlock text={added} />
       <Filter filter={filter} handleChange={handleFilterChange} />
       <h2>add a new</h2>
       <PersonForm
