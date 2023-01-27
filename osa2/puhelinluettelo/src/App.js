@@ -10,7 +10,8 @@ const App = () => {
   const [filter, setFilter] = useState('')
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [added, setAdded] = useState(null)
+  const [blockText, setBlockText] = useState(null)
+  const [error, setError] = useState(false)
 
   const hook = () => {
     personService
@@ -23,9 +24,9 @@ const App = () => {
   useEffect(hook, [])
 
   function changeSuccessBlock(text) {
-    setAdded(text)
+    setBlockText(text)
     setTimeout(() => {
-      setAdded(null)
+      setBlockText(null)
     }, 5000)
   }
 
@@ -34,14 +35,19 @@ const App = () => {
     if (persons.find((person) => person.name === newName.trim())) {
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         const person = persons.find(p => p.name === newName.trim())
-        console.log("person", person)
+        const changedPerson = { ...person, number: newNumber.trim()}
 
         personService
-          .update(person.id, { ...person, number: newNumber.trim()})
+          .update(person.id, changedPerson)
           .then(response => {
             setPersons(persons.map(p => p.id !== person.id ? p : response.data))
             setNewName('')
             setNewNumber('')
+          .catch(error => {
+            setError(true)
+          }
+
+          )
         })
         changeSuccessBlock(`Changed ${person.name}`)
       }
@@ -86,7 +92,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <SuccessBlock text={added} />
+      <SuccessBlock text={blockText} error={error} />
       <Filter filter={filter} handleChange={handleFilterChange} />
       <h2>add a new</h2>
       <PersonForm
