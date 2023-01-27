@@ -2,9 +2,10 @@ const SuccessBlock = ({ text, error }) => {
   if (text === null) {
     return null
   }
-
+  const classi = error ? "error" : "success"
+  
   return (
-    <div className={() => error ? "error" : "success"}>
+    <div className={classi}>
       {text}
     </div>
   )

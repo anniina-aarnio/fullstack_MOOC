@@ -16,8 +16,8 @@ const App = () => {
   const hook = () => {
     personService
       .getAll()
-      .then(response => {
-        setPersons(response.data)
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }
 
@@ -32,24 +32,27 @@ const App = () => {
 
   const handleClick = (e) => {
     e.preventDefault()
-    if (persons.find((person) => person.name === newName.trim())) {
+    setError(false)
+    
+    if (persons.find(person => person.name.toLowerCase() === newName.trim().toLowerCase())) {
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
-        const person = persons.find(p => p.name === newName.trim())
+        const person = persons.find(p => p.name.toLowerCase() === newName.trim().toLowerCase())
         const changedPerson = { ...person, number: newNumber.trim()}
 
         personService
           .update(person.id, changedPerson)
-          .then(response => {
-            setPersons(persons.map(p => p.id !== person.id ? p : response.data))
+          .then(returnedPerson => {
+            setPersons(persons.map(p => p.id !== person.id ? p : returnedPerson))
             setNewName('')
             setNewNumber('')
-          .catch(error => {
+            changeSuccessBlock(`Changed ${person.name}`)
+          })
+          .catch(error2 => {
             setError(true)
+            changeSuccessBlock(`Information of ${newName} has already been removed from server`)
           }
-
-          )
-        })
-        changeSuccessBlock(`Changed ${person.name}`)
+        )
+        
       }
       return
     }
@@ -57,12 +60,12 @@ const App = () => {
 
     personService
       .create(personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
+        changeSuccessBlock(`Added ${personObject.name}`)
       })
-    changeSuccessBlock(`Added ${personObject.name}`)
   }
 
   const handleNameChange = (e) => {
