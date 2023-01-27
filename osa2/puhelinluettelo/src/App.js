@@ -33,7 +33,7 @@ const App = () => {
   const handleClick = (e) => {
     e.preventDefault()
     setError(false)
-    
+
     if (persons.find(person => person.name.toLowerCase() === newName.trim().toLowerCase())) {
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         const person = persons.find(p => p.name.toLowerCase() === newName.trim().toLowerCase())
@@ -50,6 +50,7 @@ const App = () => {
           .catch(error2 => {
             setError(true)
             changeSuccessBlock(`Information of ${newName} has already been removed from server`)
+            setPersons(persons.filter(p => p.id !== person.id))
           }
         )
         
