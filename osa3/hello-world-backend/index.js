@@ -27,6 +27,24 @@ app.get('/api/notes', (req, res) => {
     res.json(notes)
 })
 
+app.get('/api/notes/:id', (req, res) => {
+    const id = Number(req.params.id)
+    const note = notes.find(note => note.id === id)
+    
+    if (note) {
+        res.json(note)
+    } else {
+        res.status(404).end()
+    }
+})
+
+app.delete('/api/notes/:id', (request, response) => {
+    const id = Number(request.params.id)
+    notes = notes.filter(note => note.id !== id)
+    
+    response.status(204).end() // voisi olla myös 404
+})
+
 const PORT = 3001
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
