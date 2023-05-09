@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+app.use(express.json())
+
 let notes = [
     {
         id: 1,
@@ -18,6 +20,7 @@ let notes = [
         important: true
     }
 ]
+
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
@@ -43,6 +46,12 @@ app.delete('/api/notes/:id', (request, response) => {
     notes = notes.filter(note => note.id !== id)
     
     response.status(204).end() // voisi olla myös 404
+})
+
+app.post('/api/notes', (request, response) => {
+    const note = request.body
+    console.log(note)
+    response.json(note)
 })
 
 const PORT = 3001
