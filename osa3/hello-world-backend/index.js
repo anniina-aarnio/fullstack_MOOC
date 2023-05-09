@@ -37,7 +37,7 @@ app.get('/api/notes/:id', (req, res) => {
     if (note) {
         res.json(note)
     } else {
-        res.status(404).end()
+        res.status(204).end()
     }
 })
 
