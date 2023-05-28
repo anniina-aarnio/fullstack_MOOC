@@ -57,24 +57,29 @@ const App = () => {
             setNewNumber("");
             changeSuccessBlock(`Changed ${person.name}`);
           })
-          .catch((error2) => {
+          .catch((error) => {
             setError(true);
-            changeSuccessBlock(
-              `Information of ${newName} has already been removed from server`
-            );
-            setPersons(persons.filter((p) => p.id !== person.id));
+            changeSuccessBlock(error.response.data.error);
+            //setPersons(persons.filter((p) => p.id !== person.id));
           });
       }
       return;
     }
     const personObject = { name: newName.trim(), number: newNumber.trim() };
 
-    personService.create(personObject).then((returnedPerson) => {
-      setPersons(persons.concat(returnedPerson));
-      setNewName("");
-      setNewNumber("");
-      changeSuccessBlock(`Added ${personObject.name}`);
-    });
+    personService
+      .create(personObject)
+      .then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        setNewName("");
+        setNewNumber("");
+        changeSuccessBlock(`Added ${personObject.name}`);
+      })
+      .catch((error) => {
+        console.log("VIRHE!!!", error.response.data.error);
+        setError(true);
+        changeSuccessBlock(error.response.data.error);
+      });
   };
 
   const handleNameChange = (e) => {
