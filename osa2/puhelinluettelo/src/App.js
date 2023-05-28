@@ -1,97 +1,103 @@
-import { useState, useEffect } from 'react'
-import personService from './services/persons'
-import Filter from './components/Filter'
-import PersonForm from './components/PersonForm'
-import Persons from './components/Persons'
-import SuccessBlock from './components/SuccessBlock'
+import { useState, useEffect } from "react";
+import personService from "./services/persons";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
+import Persons from "./components/Persons";
+import SuccessBlock from "./components/SuccessBlock";
 
 const App = () => {
-  const [persons, setPersons] = useState([])
-  const [filter, setFilter] = useState('')
-  const [newName, setNewName] = useState('')
-  const [newNumber, setNewNumber] = useState('')
-  const [blockText, setBlockText] = useState(null)
-  const [error, setError] = useState(false)
+  const [persons, setPersons] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
+  const [blockText, setBlockText] = useState(null);
+  const [error, setError] = useState(false);
 
   const hook = () => {
-    personService
-      .getAll()
-      .then(initialPersons => {
-        setPersons(initialPersons)
-      })
-  }
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
+    });
+  };
 
-  useEffect(hook, [])
+  useEffect(hook, []);
 
   function changeSuccessBlock(text) {
-    setBlockText(text)
+    setBlockText(text);
     setTimeout(() => {
-      setBlockText(null)
-    }, 5000)
+      setBlockText(null);
+    }, 5000);
   }
 
   const handleClick = (e) => {
-    e.preventDefault()
-    setError(false)
+    e.preventDefault();
+    setError(false);
 
-    if (persons.find(person => person.name.toLowerCase() === newName.trim().toLowerCase())) {
-      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
-        const person = persons.find(p => p.name.toLowerCase() === newName.trim().toLowerCase())
-        const changedPerson = { ...person, number: newNumber.trim()}
+    if (
+      persons.find(
+        (person) => person.name.toLowerCase() === newName.trim().toLowerCase()
+      )
+    ) {
+      if (
+        window.confirm(
+          `${newName} is already added to phonebook, replace the old number with a new one?`
+        )
+      ) {
+        const person = persons.find(
+          (p) => p.name.toLowerCase() === newName.trim().toLowerCase()
+        );
+        const changedPerson = { ...person, number: newNumber.trim() };
 
         personService
           .update(person.id, changedPerson)
-          .then(returnedPerson => {
-            setPersons(persons.map(p => p.id !== person.id ? p : returnedPerson))
-            setNewName('')
-            setNewNumber('')
-            changeSuccessBlock(`Changed ${person.name}`)
+          .then((returnedPerson) => {
+            setPersons(
+              persons.map((p) => (p.id !== person.id ? p : returnedPerson))
+            );
+            setNewName("");
+            setNewNumber("");
+            changeSuccessBlock(`Changed ${person.name}`);
           })
-          .catch(error2 => {
-            setError(true)
-            changeSuccessBlock(`Information of ${newName} has already been removed from server`)
-            setPersons(persons.filter(p => p.id !== person.id))
-          }
-        )
-        
+          .catch((error2) => {
+            setError(true);
+            changeSuccessBlock(
+              `Information of ${newName} has already been removed from server`
+            );
+            setPersons(persons.filter((p) => p.id !== person.id));
+          });
       }
-      return
+      return;
     }
-    const personObject = { name: newName.trim(), number: newNumber.trim() }
+    const personObject = { name: newName.trim(), number: newNumber.trim() };
 
-    personService
-      .create(personObject)
-      .then(returnedPerson => {
-        setPersons(persons.concat(returnedPerson))
-        setNewName('')
-        setNewNumber('')
-        changeSuccessBlock(`Added ${personObject.name}`)
-      })
-  }
+    personService.create(personObject).then((returnedPerson) => {
+      setPersons(persons.concat(returnedPerson));
+      setNewName("");
+      setNewNumber("");
+      changeSuccessBlock(`Added ${personObject.name}`);
+    });
+  };
 
   const handleNameChange = (e) => {
-    setNewName(e.target.value)
-  }
+    setNewName(e.target.value);
+  };
 
   const handleNumberChange = (e) => {
-    setNewNumber(e.target.value)
-  }
+    setNewNumber(e.target.value);
+  };
 
   const handleFilterChange = (e) => {
-    setFilter(e.target.value)
-  }
+    setFilter(e.target.value);
+  };
 
   const deleteObject = (id) => {
-    const person = persons.find(p => p.id === id)
+    const person = persons.find((p) => p.id === id);
     if (window.confirm(`Delete ${person.name} ?`)) {
-      personService
-        .deletePerson(id)
-        .then(response => {
-          setPersons(persons.filter(p => p.id !== id))
-        })
-      changeSuccessBlock(`${person.name} deleted`)
+      personService.deletePerson(id).then((response) => {
+        setPersons(persons.filter((p) => p.id !== id));
+      });
+      changeSuccessBlock(`${person.name} deleted`);
     }
-  }
+  };
 
   return (
     <div>
@@ -104,15 +110,12 @@ const App = () => {
         nameChange={handleNameChange}
         number={newNumber}
         numberChange={handleNumberChange}
-        handleClick={handleClick} />
+        handleClick={handleClick}
+      />
       <h2>Numbers</h2>
-      <Persons
-        persons={persons}
-        filter={filter}
-        deleteObject={deleteObject} />
+      <Persons persons={persons} filter={filter} deleteObject={deleteObject} />
     </div>
-  )
+  );
+};
 
-}
-
-export default App
+export default App;
