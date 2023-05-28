@@ -76,7 +76,6 @@ const App = () => {
         changeSuccessBlock(`Added ${personObject.name}`);
       })
       .catch((error) => {
-        console.log("VIRHE!!!", error.response.data.error);
         setError(true);
         changeSuccessBlock(error.response.data.error);
       });
