@@ -8,12 +8,18 @@ const App = () => {
     'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
-    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.'
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.',
   ]
-   
+
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState({
-    0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
   })
   const [mostVoted, setMostVoted] = useState(0)
 
@@ -27,32 +33,24 @@ const App = () => {
   }
 
   const handleVote = () => {
-    let newPoints = { ... points}
+    let newPoints = { ...points }
     newPoints[selected] += 1
     if (newPoints[selected] > points[mostVoted]) {
       setMostVoted(selected)
     }
-    setPoints(newPoints) 
+    setPoints(newPoints)
   }
 
   return (
     <div>
       <h2>Anecdote of the day</h2>
+      <div>{anecdotes[selected]}</div>
       <div>
-        {anecdotes[selected]}
-      </div>
-      <div>
-        <button onClick={handleVote}>
-          vote
-        </button>
-        <button onClick={handleNext}>
-          next anecdote
-        </button>
+        <button onClick={handleVote}>vote</button>
+        <button onClick={handleNext}>next anecdote</button>
       </div>
       <h2>Anecdote with most votes</h2>
-      <div>
-        {anecdotes[mostVoted]}
-      </div>
+      <div>{anecdotes[mostVoted]}</div>
     </div>
   )
 }

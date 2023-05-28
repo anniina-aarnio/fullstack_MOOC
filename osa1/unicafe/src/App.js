@@ -1,14 +1,10 @@
-import { useState } from "react"
+import { useState } from 'react'
 
-const Button = ({ handleClick, text}) => {
-  return (
-    <button onClick={handleClick}>
-      {text}
-    </button>
-  )
+const Button = ({ handleClick, text }) => {
+  return <button onClick={handleClick}>{text}</button>
 }
 
-const StatisticsLine = ({ text, value}) => {
+const StatisticsLine = ({ text, value }) => {
   return (
     <tr>
       <td>{text}</td>
@@ -25,19 +21,19 @@ const Statistics = ({ feedback }) => {
   }
 
   let average = (feedback.good - feedback.bad) / sum
-  let positive = feedback.good / sum * 100
+  let positive = (feedback.good / sum) * 100
 
   return (
     <div>
       <h2>statistics</h2>
       <table>
         <tbody>
-          <StatisticsLine text={"good"} value={feedback.good} />
-          <StatisticsLine text={"neutral"} value={feedback.neutral} />
-          <StatisticsLine text={"bad"} value={feedback.bad} />
-          <StatisticsLine text={"all"} value={sum} />
-          <StatisticsLine text={"average"} value={average} />
-          <StatisticsLine text={"positive"} value={String(positive) + "%"} />
+          <StatisticsLine text={'good'} value={feedback.good} />
+          <StatisticsLine text={'neutral'} value={feedback.neutral} />
+          <StatisticsLine text={'bad'} value={feedback.bad} />
+          <StatisticsLine text={'all'} value={sum} />
+          <StatisticsLine text={'average'} value={average} />
+          <StatisticsLine text={'positive'} value={String(positive) + '%'} />
         </tbody>
       </table>
     </div>
@@ -45,15 +41,14 @@ const Statistics = ({ feedback }) => {
 }
 
 function App() {
-
   const [feedback, setFeedback] = useState({
-      good: 0,
-      neutral: 0,
-      bad: 0
+    good: 0,
+    neutral: 0,
+    bad: 0,
   })
 
-  const handleClick = (which) => () => {
-    let newFeedback = { ...feedback}
+  const handleClick = which => () => {
+    let newFeedback = { ...feedback }
     newFeedback[which] = newFeedback[which] + 1
     setFeedback(newFeedback)
   }
@@ -61,12 +56,12 @@ function App() {
   return (
     <div>
       <h1>give feedback</h1>
-      <Button handleClick={handleClick("good")} text={"good"} />
-      <Button handleClick={handleClick("neutral")} text={"neutral"} />
-      <Button handleClick={handleClick("bad")} text={"bad"} />
+      <Button handleClick={handleClick('good')} text={'good'} />
+      <Button handleClick={handleClick('neutral')} text={'neutral'} />
+      <Button handleClick={handleClick('bad')} text={'bad'} />
       <Statistics feedback={feedback} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
